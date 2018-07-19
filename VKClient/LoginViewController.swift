@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
         if !checkUserData() {
-            showAlert("Вход запрещен. Неверный логин или пароль")
+            showAlert("Вход запрещен. Неверный логин или пароль!")
             return false
         } else {
             return true
