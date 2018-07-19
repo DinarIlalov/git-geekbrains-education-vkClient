@@ -42,7 +42,8 @@ class LoginViewController: UIViewController {
     }
     
     func newFeature(){
-        let asd = tree
+        let asd = "tree"
+        print(asd)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
