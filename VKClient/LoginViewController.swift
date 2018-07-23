@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func unwindSegue(seque: UIStoryboardSegue){
-        
+        // logout segue from My friends controller
     }
     
     @objc private func tapGestureDidTap() {
@@ -67,6 +67,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification: Notification) {
+        
         if let userInfo = notification.userInfo,
             let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
@@ -86,11 +87,12 @@ class LoginViewController: UIViewController {
     
     // MARK: Functions
     private func checkUserData() -> Bool {
+        
         guard let login = loginTextField.text,
             let password = passwordTextField.text else {
                 return false
         }
-        return (login == "admin" && password == "123")
+        return (login == "a" && password == "a")
     }
     
     private func showAlert(_ message: String) {
