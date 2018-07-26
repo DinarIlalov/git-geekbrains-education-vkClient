@@ -12,6 +12,29 @@ class AllGroupsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var groupImage: UIImageView!
-    @IBOutlet weak var usersCountLabel: UILabel!
+    @IBOutlet weak var groupTypeLabel: UILabel!
 
+    var groupId: Int?
+    var groupAvatarUrl: String? {
+        didSet {
+            groupImage.image = nil
+            loadAvatarImageForGroup()
+        }
+    }
+    
+    private func loadAvatarImageForGroup() {
+        
+        if let url = groupAvatarUrl {
+            VKApiService().createRequestAndGetImage(from: url) { (response) in
+                
+                if url == self.groupAvatarUrl,
+                    let data = response {
+                    DispatchQueue.main.async {
+                        self.groupImage.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+        
+    }
 }

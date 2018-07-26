@@ -11,7 +11,7 @@ import UIKit
 class MyGroupsTableViewController: UITableViewController {
 
     // MARK: Properties
-    private var myGroups: [[String: String]] = []
+     var myGroups: [[String: String]] = []
     
     // MARK: Class funcs
     override func viewDidLoad() {
@@ -63,18 +63,11 @@ class MyGroupsTableViewController: UITableViewController {
                     return
             }
             
-            var selectedGroup: [String: String]
-            if (allGroupsController.searchBar.text ?? "").isEmpty {
-                selectedGroup = allGroupsController.groups[selectedGroupIndexPath.row]
-            } else {
-                selectedGroup = allGroupsController.filteredGroups[selectedGroupIndexPath.row]
-            }
+            let selectedGroup = allGroupsController.filteredGroups[selectedGroupIndexPath.row]
             
-            if let groupName = selectedGroup["name"],
-                let groupAvatar = selectedGroup["avatar"],
-                !myGroups.contains(["name": groupName, "avatar": groupAvatar]) {
+            if !myGroups.contains(["name": selectedGroup.name, "avatar": selectedGroup.avatarUrl]) {
                 
-                myGroups.append(["name": groupName, "avatar": groupAvatar])
+                myGroups.append(["name": selectedGroup.name, "avatar": selectedGroup.avatarUrl])
                 tableView.reloadData()
             }
             
@@ -86,6 +79,9 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: - Functions
     private func fillMyGroupsData() {
         
+        VKApiService().getCurrentUserGroups()
+        
+        // TODO: переделать на классы
         myGroups = [
             ["name": "Первый канал", "avatar": "ic_groupImage1"],
             ["name": "Россия 1", "avatar": "ic_groupImage2"]

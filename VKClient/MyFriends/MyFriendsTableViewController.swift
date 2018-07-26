@@ -12,6 +12,7 @@ class MyFriendsTableViewController: UITableViewController {
 
     // MARK: Properties
     private var friends: [[String: String]] = []
+    private var vkServise = VKApiService()
     
     // MARK: class funcs
     override func viewDidLoad() {
@@ -45,6 +46,10 @@ class MyFriendsTableViewController: UITableViewController {
 
     // MARK: - Functions
     private func fillFriendsData() {
+        
+        vkServise.getCurrentUserFriends()
+        
+        // TODO: переделать на классы
         friends = [
             ["name": "Иван", "avatar": "ic_userAvatar"],
             ["name": "Степан", "avatar": "ic_userAvatar"],
