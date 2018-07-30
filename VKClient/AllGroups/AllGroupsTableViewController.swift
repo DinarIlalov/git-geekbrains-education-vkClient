@@ -27,11 +27,23 @@ class AllGroupsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredGroups.count == 0 ? 0 : filteredGroups.count + 1
+        if (searchBar.text ?? "").isEmpty {
+            return 0
+        } else {
+            return filteredGroups.count + 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // строка если ничего не найдено
+        if !(searchBar.text ?? "").isEmpty, filteredGroups.count == 0 {
+            let cell = UITableViewCell.init(style: .default, reuseIdentifier: "")
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
+            cell.textLabel?.text = "По поиску \(searchBar.text ?? "") ничего не найдено"
+            return cell
+        }
         // строка для продолжения поиска "Показать еще"
         if indexPath.row+1 > filteredGroups.count {
             let cell = UITableViewCell.init(style: .default, reuseIdentifier: "")
@@ -43,12 +55,7 @@ class AllGroupsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsTableViewCell", for: indexPath) as? AllGroupsTableViewCell
             else { return UITableViewCell() }
         
-        let group = filteredGroups[indexPath.row]
-        cell.groupId = group.id
-        cell.groupAvatarUrl = group.avatarUrl
-        cell.groupNameLabel.text = group.name
-        cell.groupTypeLabel.text = group.type.description
-        
+        cell.group = filteredGroups[indexPath.row]
         return cell
         
     }
@@ -75,9 +82,7 @@ class AllGroupsTableViewController: UITableViewController {
                 } else {
                     self?.filteredGroups += groups
                 }
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
+                self?.tableView.reloadData()
             }
         } else {
             filteredGroups = []
@@ -85,7 +90,6 @@ class AllGroupsTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
-    
 }
 
 // MARK: - Search Bar delegate

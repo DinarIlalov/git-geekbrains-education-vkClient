@@ -11,7 +11,6 @@ import Foundation
 class UserData {
     
     // TODO: переделать на Keychain
-    
     static func SaveData(token: String, userId: Int) {
         UserDefaults.standard.set(token, forKey: "Token")
         UserDefaults.standard.set(userId, forKey: "UserId")

@@ -25,7 +25,6 @@
 		0DE036AC20F869FF001226D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AA20F869FF001226D6 /* Main.storyboard */; };
 		0DE036AE20F86A01001226D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AD20F86A01001226D6 /* Assets.xcassets */; };
 		0DE036B120F86A01001226D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AF20F86A01001226D6 /* LaunchScreen.storyboard */; };
-		0DE036B920F86B00001226D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE036B820F86B00001226D6 /* LoginViewController.swift */; };
 		BE327768C3B4414471861A4E /* Pods_VKClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B226A68DB316CA21F8A5F0E6 /* Pods_VKClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +49,6 @@
 		0DE036AD20F86A01001226D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DE036B020F86A01001226D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DE036B220F86A01001226D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0DE036B820F86B00001226D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		366CD993120C3E78EB50D8F5 /* Pods-VKClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKClient/Pods-VKClient.debug.xcconfig"; sourceTree = "<group>"; };
 		B226A68DB316CA21F8A5F0E6 /* Pods_VKClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C899A0DC04AD29AFBA21DAC1 /* Pods-VKClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-VKClient/Pods-VKClient.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 		0D1A658E2106FD4F0047BFBB /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				0DE036B820F86B00001226D6 /* LoginViewController.swift */,
 				0D1A658F2106FDBF0047BFBB /* VKLoginViewController.swift */,
 			);
 			path = Authorization;
@@ -264,10 +261,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-VKClient/Pods-VKClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -318,7 +317,6 @@
 				0D21E45521059EFD00496350 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				0D1A65982107076D0047BFBB /* UserData.swift in Sources */,
 				0DC70B1F21070BBD009CA2AB /* Friends.swift in Sources */,
-				0DE036B920F86B00001226D6 /* LoginViewController.swift in Sources */,
 				0D5C62C321020BE0002F6786 /* AllGroupsTableViewController.swift in Sources */,
 				0DE036A720F869FF001226D6 /* AppDelegate.swift in Sources */,
 				0D5C62BC2101BB8C002F6786 /* MyGroupsTableViewController.swift in Sources */,
@@ -477,10 +475,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4RHMF78FV;
 				INFOPLIST_FILE = VKClient/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.education.iosfacultet.VKClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -496,10 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4RHMF78FV;
 				INFOPLIST_FILE = VKClient/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.education.iosfacultet.VKClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

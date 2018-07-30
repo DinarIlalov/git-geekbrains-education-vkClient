@@ -11,8 +11,7 @@ import UIKit
 class MyFriendsTableViewController: UITableViewController {
 
     // MARK: Properties
-    private var friends: [[String: String]] = []
-    private var vkServise = VKApiService()
+    private var friends: [Friend] = []
     
     // MARK: class funcs
     override func viewDidLoad() {
@@ -21,6 +20,13 @@ class MyFriendsTableViewController: UITableViewController {
         fillFriendsData()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let photoCollectionController = segue.destination as? MyFriendPhotoCollectionViewController,
+            let cell = sender as? FriendTableViewCell {
+            photoCollectionController.userId = cell.friend?.id ?? 0
+        }
+    }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -36,33 +42,19 @@ class MyFriendsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell", for: indexPath) as? FriendTableViewCell
             else { return UITableViewCell() }
 
-        if let imageName = friends[indexPath.row]["avatar"] {
-            cell.avatarImageView.image = UIImage(named: imageName)
-        }
-        cell.userNameLabel.text = friends[indexPath.row]["name"]
-        
+        cell.friend = friends[indexPath.row]
         return cell
     }
 
     // MARK: - Functions
     private func fillFriendsData() {
         
-        vkServise.getCurrentUserFriends()
+        VKApiService().getCurrentUserFriends() { [weak self] friends in
+            self?.friends = friends
+            self?.tableView.reloadData()
+        }
         
-        // TODO: переделать на классы
-        friends = [
-            ["name": "Иван", "avatar": "ic_userAvatar"],
-            ["name": "Степан", "avatar": "ic_userAvatar"],
-            ["name": "Николай", "avatar": "ic_userAvatarMale"],
-            ["name": "Петр", "avatar": "ic_userAvatarMale"],
-            ["name": "Дженифер Лопес", "avatar": "ic_userAvatarFemale"],
-            ["name": "Николай Басков", "avatar": "ic_userAvatar"],
-            ["name": "Иоган Себастьян Бах", "avatar": "ic_userAvatarMale"],
-            ["name": "Людвиг Ван Бетховен", "avatar": "ic_userAvatar"],
-            ["name": "Корнита Анжелика Феррейро Роше", "avatar": "ic_userAvatarFemale"],
-            ["name": "Имя 1", "avatar": "ic_userAvatarFemale"],
-            ["name": "Имя Фамилия Отчество На Две Строчки", "avatar": "ic_userAvatar"]
-        ]
+        
     }
     
 }

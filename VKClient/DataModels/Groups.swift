@@ -8,8 +8,13 @@
 
 import Foundation
 
-// TODO: переделать на классы
-class Group {
+class Group: Hashable{
+    var hashValue: Int { return id }
+    
+    static func == (lhs: Group, rhs: Group) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     
     let id: Int
     let name: String

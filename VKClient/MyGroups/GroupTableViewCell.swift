@@ -13,4 +13,18 @@ class GroupTableViewCell: UITableViewCell {
     @IBOutlet weak var groupNameLabel: UILabel!
     @IBOutlet weak var groupImage: UIImageView!
 
+    var group: Group? {
+        didSet {
+            configure()
+        }
+    }
+    
+    private func configure() {
+        groupNameLabel.text = group?.name
+        if let avatarUrl = group?.avatarUrl {
+            let url = URL(string: avatarUrl)
+            groupImage.kf.setImage(with: url)
+        }
+        
+    }
 }

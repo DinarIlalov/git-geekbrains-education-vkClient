@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AllGroupsTableViewCell: UITableViewCell {
 
@@ -14,27 +15,24 @@ class AllGroupsTableViewCell: UITableViewCell {
     @IBOutlet weak var groupImage: UIImageView!
     @IBOutlet weak var groupTypeLabel: UILabel!
 
-    var groupId: Int?
-    var groupAvatarUrl: String? {
+    var group: Group? {
         didSet {
-            groupImage.image = nil
-            loadAvatarImageForGroup()
+            configure()
         }
     }
     
+    private func configure() {
+        groupNameLabel.text = group?.name
+        groupTypeLabel.text = group?.type.description
+        
+        loadAvatarImageForGroup()
+    }
+    
     private func loadAvatarImageForGroup() {
-        
-        if let url = groupAvatarUrl {
-            VKApiService().createRequestAndGetImage(from: url) { (response) in
-                
-                if url == self.groupAvatarUrl,
-                    let data = response {
-                    DispatchQueue.main.async {
-                        self.groupImage.image = UIImage(data: data)
-                    }
-                }
-            }
+        groupImage.image = nil
+        if let avatarUrl = group?.avatarUrl {
+            let url = URL(string: avatarUrl)
+            groupImage.kf.setImage(with: url)
         }
-        
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class MyGroupsTableViewController: UITableViewController {
 
     // MARK: Properties
-     var myGroups: [[String: String]] = []
+     var myGroups: [Group] = []
     
     // MARK: Class funcs
     override func viewDidLoad() {
@@ -34,10 +34,7 @@ class MyGroupsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as? GroupTableViewCell
             else { return UITableViewCell() }
         
-        if let imageName = myGroups[indexPath.row]["avatar"] {
-            cell.groupImage.image = UIImage(named: imageName)
-        }
-        cell.groupNameLabel.text = myGroups[indexPath.row]["name"]
+        cell.group = myGroups[indexPath.row]
         
         return cell
     }
@@ -65,9 +62,8 @@ class MyGroupsTableViewController: UITableViewController {
             
             let selectedGroup = allGroupsController.filteredGroups[selectedGroupIndexPath.row]
             
-            if !myGroups.contains(["name": selectedGroup.name, "avatar": selectedGroup.avatarUrl]) {
-                
-                myGroups.append(["name": selectedGroup.name, "avatar": selectedGroup.avatarUrl])
+            if !myGroups.contains(selectedGroup) {
+                myGroups.append(selectedGroup)
                 tableView.reloadData()
             }
             
@@ -79,12 +75,11 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: - Functions
     private func fillMyGroupsData() {
         
-        VKApiService().getCurrentUserGroups()
+        VKApiService().getCurrentUserGroups() { [weak self] (groups) in
+            self?.myGroups = groups
+            self?.tableView.reloadData()
+        }
         
-        // TODO: переделать на классы
-        myGroups = [
-            ["name": "Первый канал", "avatar": "ic_groupImage1"],
-            ["name": "Россия 1", "avatar": "ic_groupImage2"]
-        ]
+    
     }
 }

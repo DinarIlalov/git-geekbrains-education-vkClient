@@ -8,26 +8,28 @@
 
 import Foundation
 
-// TODO: переделать на классы
 class Friend {
     
-    let id: String
+    let id: Int
     let name: String
     let avatarUrl: String
+    var online: Bool = false
     
-    init(id: String, name: String, avatarUrl: String) {
+    init(id: Int, name: String, avatarUrl: String) {
         self.id = id
         self.name = name
         self.avatarUrl = avatarUrl
     }
     
-    convenience init?(json: [String: Any]) {
+    init?(json: [String: Any]) {
         
-        guard let name = json["title"] as? String,
-            let id = json["id"] as? String else { return nil }
+        guard let name = json["first_name"] as? String,
+            let id = json["id"] as? Int else { return nil }
         
-        self.init(id: id, name: name, avatarUrl: json["photo_50"] as? String ?? "")
-        
+        self.id = id
+        self.name = "\(name) \(json["last_name"] ?? "")"
+        self.avatarUrl = json["photo_50"] as? String ?? ""
+        self.online = json["online"] as? Bool ?? false
     }
     
 }

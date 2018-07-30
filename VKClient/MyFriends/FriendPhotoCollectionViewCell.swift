@@ -12,4 +12,10 @@ class FriendPhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
     
+    var avatarUrl: String = "" {
+        didSet {
+            let url = URL(string: avatarUrl)
+            photoImageView.kf.setImage(with: url)
+        }
+    }
 }

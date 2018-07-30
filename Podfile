@@ -7,4 +7,5 @@ target 'VKClient' do
 
   # Pods for VKClient
 pod 'Alamofire'
+pod 'Kingfisher'
 end
