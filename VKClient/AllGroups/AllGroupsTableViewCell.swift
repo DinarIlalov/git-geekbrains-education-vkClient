@@ -12,9 +12,14 @@ import Kingfisher
 class AllGroupsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var groupNameLabel: UILabel!
-    @IBOutlet weak var groupImage: UIImageView!
     @IBOutlet weak var groupTypeLabel: UILabel!
-
+    @IBOutlet weak var groupImage: UIImageView! {
+        didSet {
+            groupImage.round()
+        }
+    }
+    @IBOutlet weak var memberCountLabel: UILabel!
+    
     var group: Group? {
         didSet {
             configure()
@@ -23,7 +28,8 @@ class AllGroupsTableViewCell: UITableViewCell {
     
     private func configure() {
         groupNameLabel.text = group?.name
-        groupTypeLabel.text = group?.type.description
+        groupTypeLabel.text = (GroupsType(rawValue: group?.type ?? "group") ?? GroupsType.group).description
+        memberCountLabel.text = "\(group?.members_count ?? 0) подписчика"
         
         loadAvatarImageForGroup()
     }

@@ -10,7 +10,11 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView! {
+        didSet {
+            avatarImageView.round()
+        }
+    }
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userStatusLabel: UILabel!
     

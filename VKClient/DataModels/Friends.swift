@@ -7,24 +7,24 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Friend {
+class Friend: Object {
     
-    let id: Int
-    let name: String
-    let avatarUrl: String
-    var online: Bool = false
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var avatarUrl: String = ""
+    @objc dynamic var online: Bool = false
     
-    init(id: Int, name: String, avatarUrl: String) {
-        self.id = id
-        self.name = name
-        self.avatarUrl = avatarUrl
+    override static func primaryKey() -> String? {
+        return "id"
     }
     
-    init?(json: [String: Any]) {
-        
+    convenience init?(json: [String: Any]) {
         guard let name = json["first_name"] as? String,
             let id = json["id"] as? Int else { return nil }
+        
+        self.init()
         
         self.id = id
         self.name = "\(name) \(json["last_name"] ?? "")"

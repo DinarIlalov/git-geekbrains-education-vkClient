@@ -1,15 +1,23 @@
 PODS:
   - Alamofire (4.7.2)
   - Kingfisher (4.8.0)
+  - Realm (3.5.0):
+    - Realm/Headers (= 3.5.0)
+  - Realm/Headers (3.5.0)
+  - RealmSwift (3.5.0):
+    - Realm (= 3.5.0)
 
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
+  - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
+  RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
 
-PODFILE CHECKSUM: 16404b6a0b4d39d7e674474c2fcf2d167f9f018b
+PODFILE CHECKSUM: 686bc9c7cac45b9b93dc72b999d5d96f8444736c
 
 COCOAPODS: 1.4.0

@@ -62,9 +62,12 @@ class MyGroupsTableViewController: UITableViewController {
             
             let selectedGroup = allGroupsController.filteredGroups[selectedGroupIndexPath.row]
             
-            if !myGroups.contains(selectedGroup) {
+            let filterredGroups = myGroups.filter { $0.id == selectedGroup.id }
+            
+            if filterredGroups.count == 0 {
                 myGroups.append(selectedGroup)
                 tableView.reloadData()
+                DataBase.saveGroup(selectedGroup)
             }
             
         default:
@@ -75,11 +78,9 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: - Functions
     private func fillMyGroupsData() {
         
-        VKApiService().getCurrentUserGroups() { [weak self] (groups) in
-            self?.myGroups = groups
+        VKApiService().getCurrentUserGroups() { [weak self] in
+            self?.myGroups = DataBase.getGroups()
             self?.tableView.reloadData()
         }
-        
-    
     }
 }

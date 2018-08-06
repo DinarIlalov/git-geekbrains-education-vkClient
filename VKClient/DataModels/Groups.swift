@@ -7,39 +7,33 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Group: Hashable{
-    var hashValue: Int { return id }
+class Group: Object {
     
-    static func == (lhs: Group, rhs: Group) -> Bool {
-        return lhs.id == rhs.id
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var avatarUrl: String = ""
+    @objc dynamic var type: String = ""
+    @objc dynamic var members_count: Int = 0
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
     
-    
-    let id: Int
-    let name: String
-    let avatarUrl: String
-    let type: GroupsType
-    
-    init(id: Int, name: String, avatarUrl: String, type: GroupsType) {
-        self.id = id
-        self.name = name
-        self.avatarUrl = avatarUrl
-        self.type = type
-    }
-    
-    init?(json: [String: Any]) {
-        
-       guard let name = json["name"] as? String,
+    convenience init?(json: [String: Any]) {
+        guard let name = json["name"] as? String,
             let id = json["id"] as? Int
             else {
                 return nil
         }
+        self.init()
         
         self.name = name
         self.id = id
         self.avatarUrl = json["photo_50"] as? String ?? ""
-        self.type = GroupsType(rawValue: json["type"] as? String ?? "group") ?? GroupsType.group
+        self.type = json["type"] as? String ?? "group"
+        self.members_count = json["members_count"] as? Int ?? 0
     }
 }
 

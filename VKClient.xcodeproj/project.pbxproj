@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D19988D21180CF20096A064 /* FriendsPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D19988C21180CF20096A064 /* FriendsPhoto.swift */; };
 		0D1A65902106FDBF0047BFBB /* VKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A658F2106FDBF0047BFBB /* VKLoginViewController.swift */; };
 		0D1A65942106FEC50047BFBB /* VKAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A65932106FEC50047BFBB /* VKAuthService.swift */; };
 		0D1A65962106FFA90047BFBB /* VKApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A65952106FFA90047BFBB /* VKApiService.swift */; };
@@ -19,6 +20,8 @@
 		0D5C62BE2101BB9D002F6786 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C62BD2101BB9D002F6786 /* GroupTableViewCell.swift */; };
 		0D5C62C121020BC9002F6786 /* AllGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C62C021020BC9002F6786 /* AllGroupsTableViewCell.swift */; };
 		0D5C62C321020BE0002F6786 /* AllGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5C62C221020BE0002F6786 /* AllGroupsTableViewController.swift */; };
+		0D84C94821176E310096D562 /* UIVeiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D84C94721176E310096D562 /* UIVeiw.swift */; };
+		0D84C94A2117737D0096D562 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D84C9492117737D0096D562 /* DataBase.swift */; };
 		0DC70B1D21070BAA009CA2AB /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC70B1C21070BAA009CA2AB /* Groups.swift */; };
 		0DC70B1F21070BBD009CA2AB /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC70B1E21070BBD009CA2AB /* Friends.swift */; };
 		0DE036A720F869FF001226D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE036A620F869FF001226D6 /* AppDelegate.swift */; };
@@ -29,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D19988C21180CF20096A064 /* FriendsPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhoto.swift; sourceTree = "<group>"; };
 		0D1A658F2106FDBF0047BFBB /* VKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
 		0D1A65932106FEC50047BFBB /* VKAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAuthService.swift; sourceTree = "<group>"; };
 		0D1A65952106FFA90047BFBB /* VKApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKApiService.swift; sourceTree = "<group>"; };
@@ -41,6 +45,8 @@
 		0D5C62BD2101BB9D002F6786 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		0D5C62C021020BC9002F6786 /* AllGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		0D5C62C221020BE0002F6786 /* AllGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewController.swift; sourceTree = "<group>"; };
+		0D84C94721176E310096D562 /* UIVeiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVeiw.swift; sourceTree = "<group>"; };
+		0D84C9492117737D0096D562 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		0DC70B1C21070BAA009CA2AB /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		0DC70B1E21070BBD009CA2AB /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		0DE036A320F869FF001226D6 /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,11 +127,21 @@
 			path = AllGroups;
 			sourceTree = "<group>";
 		};
+		0D84C94621176E040096D562 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0D84C94721176E310096D562 /* UIVeiw.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		0DC70B1B21070B97009CA2AB /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				0D84C9492117737D0096D562 /* DataBase.swift */,
 				0DC70B1C21070BAA009CA2AB /* Groups.swift */,
 				0DC70B1E21070BBD009CA2AB /* Friends.swift */,
+				0D19988C21180CF20096A064 /* FriendsPhoto.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -151,6 +167,7 @@
 		0DE036A520F869FF001226D6 /* VKClient */ = {
 			isa = PBXGroup;
 			children = (
+				0D84C94621176E040096D562 /* Extensions */,
 				0DE036A620F869FF001226D6 /* AppDelegate.swift */,
 				0DC70B1B21070B97009CA2AB /* DataModels */,
 				0D1A65912106FEA30047BFBB /* Services */,
@@ -262,11 +279,15 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-VKClient/Pods-VKClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -313,9 +334,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D84C94821176E310096D562 /* UIVeiw.swift in Sources */,
 				0D21E45321059ED700496350 /* MyFriendPhotoCollectionViewController.swift in Sources */,
+				0D19988D21180CF20096A064 /* FriendsPhoto.swift in Sources */,
 				0D21E45521059EFD00496350 /* FriendPhotoCollectionViewCell.swift in Sources */,
 				0D1A65982107076D0047BFBB /* UserData.swift in Sources */,
+				0D84C94A2117737D0096D562 /* DataBase.swift in Sources */,
 				0DC70B1F21070BBD009CA2AB /* Friends.swift in Sources */,
 				0D5C62C321020BE0002F6786 /* AllGroupsTableViewController.swift in Sources */,
 				0DE036A720F869FF001226D6 /* AppDelegate.swift in Sources */,
@@ -475,7 +499,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4RHMF78FV;
 				INFOPLIST_FILE = VKClient/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.education.iosfacultet.VKClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -491,7 +518,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U4RHMF78FV;
 				INFOPLIST_FILE = VKClient/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fs.education.iosfacultet.VKClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

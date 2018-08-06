@@ -48,7 +48,7 @@ class VKApiService {
         }
     }
     
-    func getCurrentUserFriends(completion: @escaping ([Friend])->Void) {
+    func getCurrentUserFriends(completion: @escaping ()->Void) {
         let parameters: Parameters = [
             "access_token": accessToken,
             "v": apiVersion,
@@ -59,23 +59,27 @@ class VKApiService {
             if let json = response.value as? ResponseJSONFormat,
                 let response = json["response"],
                 let items = response["items"] as? [[String:Any]] {
+                
                 let friends = items.compactMap{ Friend(json: $0) }
+                
                 DispatchQueue.main.async {
-                    completion(friends)
+                    DataBase.saveFriends(friends)
+                    completion()
                 }
             } else {
                 DispatchQueue.main.async {
-                    completion([])
+                    completion()
                 }
             }
         }
     }
     
-    func getCurrentUserGroups(completion: @escaping ([Group])->Void) {
+    func getCurrentUserGroups(completion: @escaping ()->Void) {
         let parameters: Parameters = [
             "access_token": accessToken,
             "v": apiVersion,
-            "extended": 1
+            "extended": 1,
+            "fields": "members_count"
         ]
 
         сreateRequestAndGetResponse(parameters, "groups.get") { (response) in
@@ -84,18 +88,21 @@ class VKApiService {
                 let items = response["items"] as? [[String:Any]] {
                 
                 let groups = items.compactMap{ Group(json: $0) }
+                
                 DispatchQueue.main.async {
-                    completion(groups)
+                    DataBase.saveGroups(groups)
+                    completion()
                 }
+                
             } else {
                 DispatchQueue.main.async {
-                    completion([])
+                    completion()
                 }
             }
         }
     }
     
-    func getPhotosByUserId(_ userId: Int, completion: @escaping ([String])->Void) {
+    func getPhotosByUserId(_ userId: Int, completion: @escaping ()->Void) {
         let parameters: Parameters = [
             "access_token": accessToken,
             "v": apiVersion,
@@ -109,25 +116,15 @@ class VKApiService {
                 let response = json["response"],
                 let items = response["items"] as? [[String:Any]] {
                 
-                var photos: [String] = []
-                for item in items {
-                    if let sizes = item["sizes"] as? [[String: Any]] {
-                        photos += sizes.compactMap({ (sizeType) -> String? in
-                            if sizeType["type"] as? String == "m" {
-                                return sizeType["url"] as? String ?? nil
-                            } else {
-                                return nil
-                            }
-                        })
-                    }
-                }
+                let photos = items.compactMap{ FriendsPhoto(json: $0, userId: userId) }
                 
                 DispatchQueue.main.async {
-                    completion(photos)
+                    DataBase.saveFriendsPhoto(photos, userId: userId)
+                    completion()
                 }
             } else {
                 DispatchQueue.main.async {
-                    completion([])
+                    completion()
                 }
             }
         }
@@ -139,7 +136,8 @@ class VKApiService {
             "v": apiVersion,
             "q": groupName,
             "offset": offset,
-            "count": resultCount
+            "count": resultCount,
+            "fields": "members_count"
         ]
         
         сreateRequestAndGetResponse(parameters, "groups.search") { (response) in

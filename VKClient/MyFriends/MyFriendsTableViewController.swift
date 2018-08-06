@@ -49,12 +49,10 @@ class MyFriendsTableViewController: UITableViewController {
     // MARK: - Functions
     private func fillFriendsData() {
         
-        VKApiService().getCurrentUserFriends() { [weak self] friends in
-            self?.friends = friends
+        VKApiService().getCurrentUserFriends() { [weak self] in
+            self?.friends = DataBase.getFriends()
             self?.tableView.reloadData()
         }
-        
-        
     }
     
 }

@@ -11,13 +11,13 @@ import UIKit
 class MyFriendPhotoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var userId: Int = 0
-    var imagesUrls: [String] = []
+    var friendPhoto: [FriendsPhoto] = []
     
     // MARK: Class funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fillImagesArray()
+        fillPhotosArray()
     }
     
     // MARK: UICollectionViewDataSource
@@ -33,7 +33,7 @@ class MyFriendPhotoCollectionViewController: UICollectionViewController, UIColle
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesUrls.count
+        return friendPhoto.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,16 +41,18 @@ class MyFriendPhotoCollectionViewController: UICollectionViewController, UIColle
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendPhotoCollectionViewCell", for: indexPath) as? FriendPhotoCollectionViewCell
             else { return UICollectionViewCell() }
     
-        cell.avatarUrl = imagesUrls[indexPath.row]
+        cell.avatarUrl = friendPhoto[indexPath.row].urlSizeM.isEmpty ? friendPhoto[indexPath.row].urlSizeO : friendPhoto[indexPath.row].urlSizeM
         
         return cell
     }
     
     // MARK: functions
-    func fillImagesArray() {
-        VKApiService().getPhotosByUserId(userId) { [weak self] (photos) in
-            self?.imagesUrls = photos
-            self?.collectionView?.reloadData()
+    func fillPhotosArray() {
+        VKApiService().getPhotosByUserId(userId) { [weak self] in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.friendPhoto = DataBase.getFriendsPhoto(forUserId: strongSelf.userId)
+            strongSelf.collectionView?.reloadData()
         }
     }
 }
