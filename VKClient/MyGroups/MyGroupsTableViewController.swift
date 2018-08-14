@@ -11,7 +11,8 @@ import UIKit
 class MyGroupsTableViewController: UITableViewController {
 
     // MARK: Properties
-     var myGroups: [Group] = []
+    //var myGroups: [Group] = []
+    private var dataSource = DataSource(realmObjectType: Group.self)
     
     // MARK: Class funcs
     override func viewDidLoad() {
@@ -26,7 +27,7 @@ class MyGroupsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myGroups.count
+        return dataSource.objects?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,7 +35,7 @@ class MyGroupsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as? GroupTableViewCell
             else { return UITableViewCell() }
         
-        cell.group = myGroups[indexPath.row]
+        cell.group = dataSource.objects?[indexPath.row]
         
         return cell
     }
@@ -43,8 +44,9 @@ class MyGroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 
         if editingStyle == .delete {
-            myGroups.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            if let group = dataSource.objects?[indexPath.row] {
+                DataBase.removeGroup(group)
+            }
         }
     }
     
@@ -61,14 +63,7 @@ class MyGroupsTableViewController: UITableViewController {
             }
             
             let selectedGroup = allGroupsController.filteredGroups[selectedGroupIndexPath.row]
-            
-            let filterredGroups = myGroups.filter { $0.id == selectedGroup.id }
-            
-            if filterredGroups.count == 0 {
-                myGroups.append(selectedGroup)
-                tableView.reloadData()
-                DataBase.saveGroup(selectedGroup)
-            }
+            DataBase.saveGroup(selectedGroup)
             
         default:
             return
@@ -78,9 +73,7 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: - Functions
     private func fillMyGroupsData() {
         
-        VKApiService().getCurrentUserGroups() { [weak self] in
-            self?.myGroups = DataBase.getGroups()
-            self?.tableView.reloadData()
-        }
+        VKApiService().getCurrentUserGroups()
+        dataSource.attachTo(tableView: tableView)
     }
 }

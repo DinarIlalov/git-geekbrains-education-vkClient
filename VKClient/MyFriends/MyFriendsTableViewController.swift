@@ -11,7 +11,7 @@ import UIKit
 class MyFriendsTableViewController: UITableViewController {
 
     // MARK: Properties
-    private var friends: [Friend] = []
+    private var dataSource = DataSource(realmObjectType: Friend.self)
     
     // MARK: class funcs
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class MyFriendsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        return dataSource.objects?.count ?? 0
     }
 
     
@@ -42,17 +42,13 @@ class MyFriendsTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell", for: indexPath) as? FriendTableViewCell
             else { return UITableViewCell() }
 
-        cell.friend = friends[indexPath.row]
+        cell.friend = dataSource.objects?[indexPath.row]
         return cell
     }
 
     // MARK: - Functions
     private func fillFriendsData() {
-        
-        VKApiService().getCurrentUserFriends() { [weak self] in
-            self?.friends = DataBase.getFriends()
-            self?.tableView.reloadData()
-        }
+        VKApiService().getCurrentUserFriends()
+        dataSource.attachTo(tableView: tableView)
     }
-    
 }

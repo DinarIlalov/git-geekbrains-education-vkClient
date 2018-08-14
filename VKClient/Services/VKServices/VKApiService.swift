@@ -48,7 +48,7 @@ class VKApiService {
         }
     }
     
-    func getCurrentUserFriends(completion: @escaping ()->Void) {
+    func getCurrentUserFriends() {
         let parameters: Parameters = [
             "access_token": accessToken,
             "v": apiVersion,
@@ -64,17 +64,12 @@ class VKApiService {
                 
                 DispatchQueue.main.async {
                     DataBase.saveFriends(friends)
-                    completion()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completion()
                 }
             }
         }
     }
     
-    func getCurrentUserGroups(completion: @escaping ()->Void) {
+    func getCurrentUserGroups() {
         let parameters: Parameters = [
             "access_token": accessToken,
             "v": apiVersion,
@@ -91,18 +86,12 @@ class VKApiService {
                 
                 DispatchQueue.main.async {
                     DataBase.saveGroups(groups)
-                    completion()
-                }
-                
-            } else {
-                DispatchQueue.main.async {
-                    completion()
                 }
             }
         }
     }
     
-    func getPhotosByUserId(_ userId: Int, completion: @escaping ()->Void) {
+    func getPhotosByUserId(_ userId: Int) {
         let parameters: Parameters = [
             "access_token": accessToken,
             "v": apiVersion,
@@ -120,11 +109,6 @@ class VKApiService {
                 
                 DispatchQueue.main.async {
                     DataBase.saveFriendsPhoto(photos, userId: userId)
-                    completion()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completion()
                 }
             }
         }

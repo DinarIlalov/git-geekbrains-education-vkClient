@@ -11,7 +11,7 @@ import UIKit
 class MyFriendPhotoCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var userId: Int = 0
-    var friendPhoto: [FriendsPhoto] = []
+    private var dataSource: DataSource<FriendsPhoto>?
     
     // MARK: Class funcs
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class MyFriendPhotoCollectionViewController: UICollectionViewController, UIColle
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return friendPhoto.count
+        return dataSource?.objects?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,18 +41,19 @@ class MyFriendPhotoCollectionViewController: UICollectionViewController, UIColle
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendPhotoCollectionViewCell", for: indexPath) as? FriendPhotoCollectionViewCell
             else { return UICollectionViewCell() }
     
-        cell.avatarUrl = friendPhoto[indexPath.row].urlSizeM.isEmpty ? friendPhoto[indexPath.row].urlSizeO : friendPhoto[indexPath.row].urlSizeM
-        
+        if let friendPhoto = dataSource?.objects {
+            cell.avatarUrl = friendPhoto[indexPath.row].urlSizeM.isEmpty ? friendPhoto[indexPath.row].urlSizeO : friendPhoto[indexPath.row].urlSizeM
+        }
         return cell
     }
     
     // MARK: functions
-    func fillPhotosArray() {
-        VKApiService().getPhotosByUserId(userId) { [weak self] in
-            guard let strongSelf = self else { return }
-            
-            strongSelf.friendPhoto = DataBase.getFriendsPhoto(forUserId: strongSelf.userId)
-            strongSelf.collectionView?.reloadData()
+    private func fillPhotosArray() {
+        
+        dataSource = DataSource(realmObjectType: FriendsPhoto.self, filteredBy: "userId == \(userId)")
+        VKApiService().getPhotosByUserId(userId)
+        if let collectionView = collectionView {
+            dataSource?.attachTo(collectionView: collectionView)
         }
     }
 }

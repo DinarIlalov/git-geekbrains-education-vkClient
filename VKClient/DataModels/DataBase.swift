@@ -35,58 +35,57 @@ class DataBase {
     }
     
     static func saveGroup(_ group: Group) {
-        do {
-            let realm = try Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
-            
-            realm.beginWrite()
-            realm.add(group)
-            try realm.commitWrite()
-        } catch {
-            print(error)
-        }
+        saveDataForType(Group.self, data: [group], filteredBy: "id = \(group.id)")
     }
     
     static func getGroups() -> [Group] {
         return getDataForType(Group.self)
     }
     
+    static func removeGroup(_ group: Group) {
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            realm.delete(group)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
+    }
+    
     static func saveFriendsPhoto(_ photos: [FriendsPhoto], userId: Int) {
-        saveDataForType(FriendsPhoto.self, data: photos, filteredBy: NSPredicate(format: "userId = \(userId)"))
+        saveDataForType(FriendsPhoto.self, data: photos, filteredBy: "userId = \(userId)")
     }
     
     static func getFriendsPhoto(forUserId userId: Int) -> [FriendsPhoto] {
-        return getDataForType(FriendsPhoto.self, filteredBy: NSPredicate(format: "userId = \(userId)"))
+        return getDataForType(FriendsPhoto.self, filteredBy: "userId = \(userId)")
     }
     
-    private static func getDataForType<Element: Object>(_ type: Element.Type, filteredBy predicate: NSPredicate? = nil) -> [Element] {
+    private static func getDataForType<Element: Object>(_ type: Element.Type, filteredBy condition: String? = nil) -> [Element] {
         do {
             let realm = try Realm()
             
-            if let predicate = predicate {
-                let objects = realm.objects(type).filter(predicate)
-                return Array(objects)
-            } else {
-                let objects = realm.objects(type)
-                return Array(objects)
+            var objects = realm.objects(type)
+            if let condition = condition {
+                objects = objects.filter(NSPredicate(format: condition))
             }
+            return Array(objects)
         } catch {
             print(error)
             return []
         }
     }
     
-    private static func saveDataForType<Element: Object>(_ type: Element.Type, data: [Object], filteredBy predicate: NSPredicate? = nil) {
+    private static func saveDataForType<Element: Object>(_ type: Element.Type, data: [Object], filteredBy condition: String? = nil) {
         do {
             
-            let realm = try Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
+            let realm = try Realm()
             
             print(realm.configuration.fileURL as Any)
             
-            var oldData: Results<Element>
-            if let predicate = predicate {
-                oldData = realm.objects(type).filter(predicate)
-            } else {
-                oldData = realm.objects(type)
+            var oldData = realm.objects(type)
+            if let condition = condition {
+                oldData = oldData.filter(NSPredicate(format: condition))
             }
             realm.beginWrite()
             realm.delete(oldData)
