@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VKClient/MyGroups/MyGroupsTableViewController.swift"
-            timestampString = "555342118.3751611"
+            timestampString = "558011955.987349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "unwindToMyGroups(_:)"
             landmarkType = "7">
          </BreakpointContent>

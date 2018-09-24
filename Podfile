@@ -9,4 +9,7 @@ target 'VKClient' do
 pod 'Alamofire'
 pod 'Kingfisher'
 pod 'RealmSwift'
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
 end

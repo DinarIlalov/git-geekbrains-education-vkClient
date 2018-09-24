@@ -35,7 +35,7 @@ class VKApiService {
         }
     }
     
-    func getCurrentUserCredentianals() {
+    func getCurrentUserCredentianals(completion: @escaping () -> Void) {
         let parameters: Parameters = [
             "access_token": accessToken,
             "v": apiVersion
@@ -43,7 +43,9 @@ class VKApiService {
         
         сreateRequestAndGetResponse(parameters, "users.get") { (response) in
             if let json = response.value as? [String: Any] {
+                UserData.saveCurrentUserCredentials(json)
                 print(json)
+                completion()
             }
         }
     }
@@ -137,6 +139,96 @@ class VKApiService {
             } else {
                 DispatchQueue.main.async {
                     completion([], 0)
+                }
+            }
+        }
+    }
+    
+    func getNewsfeed(withOffset offset: Int, resultCount: Int, startFrom: String, completion: @escaping ([News], String)->Void) {
+        let parameters: Parameters = [
+            "access_token": accessToken,
+            "v": apiVersion,
+            "filter": "post, photo",
+            "fields": "photo",
+            "count": resultCount,
+            "start_from": startFrom
+        ]
+        
+        сreateRequestAndGetResponse(parameters, "newsfeed.get") { (response) in
+            if let json = response.value as? ResponseJSONFormat,
+                let response = json["response"],
+                let items = response["items"] as? [[String:Any]] {
+                
+                let newsfeed = items.compactMap{ News(json: $0, profiles: response["profiles"] as? [[String:Any]] ?? [], groups: response["groups"] as? [[String:Any]] ?? []) }
+                
+                DispatchQueue.main.async {
+                    completion(newsfeed, response["next_from"] as? String ?? "")
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion([], "")
+                }
+            }
+        }
+    }
+    
+    func getChatsList() {
+        let parameters: Parameters = [
+            "access_token": accessToken,
+            "v": apiVersion,
+            "extended": 1,
+            "filter": "all",
+            "offset": 0,
+            "count": 30
+        ]
+        
+        сreateRequestAndGetResponse(parameters, "messages.getConversations") { (response) in
+            if let json = response.value as? ResponseJSONFormat,
+                let response = json["response"],
+                let items = response["items"] as? [[String:Any]] {
+                
+                let chats = items.compactMap{ Chat(json: $0, profiles: response["profiles"] as? [[String:Any]] ?? [], groups: response["groups"] as? [[String:Any]] ?? []) }
+                
+                DispatchQueue.main.async {
+                    DataBase.saveChats(chats)
+                }
+            }
+        }
+    }
+    
+    func getMessages(from chat: Chat, offset: Int, count: Int, start_message_id: Int) {
+        
+        let peerId: Int
+        if chat.peerType == "user" {
+            peerId = chat.peerId
+        } else if chat.peerType == "group" {
+            peerId = chat.peerId * (-1)
+        } else if chat.peerType == "chat" {
+            peerId = chat.peerId + 2000000000
+        } else {
+            peerId = 0
+        }
+        
+        let parameters: Parameters = [
+            "access_token": accessToken,
+            "v": apiVersion,
+            "extended": 1,
+            "offset": offset,
+            "count": count,
+            //"start_message_id": start_message_id,
+            "peer_id": peerId,
+            "rev": 0
+        ]
+        
+        сreateRequestAndGetResponse(parameters, "messages.getHistory") { (response) in
+            if let json = response.value as? ResponseJSONFormat,
+                let response = json["response"],
+                let items = response["items"] as? [[String:Any]] {
+                
+                let messages = items.compactMap{ Message(json: $0) }
+                
+                DispatchQueue.main.async {
+                    DataBase.saveMessages(messages, peerId: chat.peerId)
                 }
             }
         }

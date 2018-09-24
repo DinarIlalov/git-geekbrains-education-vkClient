@@ -61,6 +61,22 @@ class DataBase {
         return getDataForType(FriendsPhoto.self, filteredBy: "userId = \(userId)")
     }
     
+    static func saveChats(_ chats: [Chat]) {
+        saveDataForType(Chat.self, data: chats)
+    }
+    
+    static func getChats() -> [Chat] {
+        return getDataForType(Chat.self)
+    }
+    
+    static func saveMessages(_ messages: [Message], peerId: Int) {
+        saveDataForType(Message.self, data: messages, filteredBy: "peerId = \(peerId)")
+    }
+    
+    static func getMessages(for peerId: Int) -> [Message] {
+        return getDataForType(Message.self, filteredBy: "peerId = \(peerId)")
+    }
+    
     private static func getDataForType<Element: Object>(_ type: Element.Type, filteredBy condition: String? = nil) -> [Element] {
         do {
             let realm = try Realm()
@@ -78,7 +94,8 @@ class DataBase {
     
     private static func saveDataForType<Element: Object>(_ type: Element.Type, data: [Object], filteredBy condition: String? = nil) {
         do {
-            
+            // для миграции
+//            let realm = try Realm(configuration: Realm.Configuration(deleteRealmIfMigrationNeeded: true))
             let realm = try Realm()
             
             print(realm.configuration.fileURL as Any)

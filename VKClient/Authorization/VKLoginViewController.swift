@@ -97,7 +97,9 @@ extension VKLoginViewController: WKNavigationDelegate {
         // TODO: debug
         print(accessToken)
         
-        VKApiService().getCurrentUserCredentianals()
+        VKApiService().getCurrentUserCredentianals() {
+            FirebaseService.saveLoginInfo()
+        }
         
         decisionHandler(.cancel)
         performSegue(withIdentifier: "mainMenuSegue", sender: self)

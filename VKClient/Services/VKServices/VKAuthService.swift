@@ -25,7 +25,7 @@ class VKAuthService : VKApiService {
                 "client_id": idApi,
                 "display": "mobile",
                 "redirect_uri": "https://oauth.vk.com/blank.html",
-                "scope": "friends,photos,groups,wall",
+                "scope": "friends,photos,groups,wall,messages",
                 "response_type": "token",
                 "v": apiVersion
             ]
