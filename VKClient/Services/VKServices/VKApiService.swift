@@ -35,6 +35,40 @@ class VKApiService {
         }
     }
     
+    func getMessagesRequest(with chatPeerType: String, chatPeerId: Int, offset: Int, count: Int, start_message_id: Int? = nil) -> DataRequest? {
+        
+        guard let url = URL(string: pathUrl) else {
+            return nil
+        }
+        
+        let peerId: Int
+        if chatPeerType == "user" {
+            peerId = chatPeerId
+        } else if chatPeerType == "group" {
+            peerId = chatPeerId * (-1)
+        } else if chatPeerType == "chat" {
+            peerId = chatPeerId + 2000000000
+        } else {
+            peerId = 0
+        }
+        
+        var parameters: Parameters = [
+            "access_token": accessToken,
+            "v": apiVersion,
+            "extended": 1,
+            "offset": offset,
+            "count": count,
+            "peer_id": peerId,
+            "rev": 0
+        ]
+        if let startMessageId = start_message_id {
+            parameters["start_message_id"] = startMessageId
+        }
+        
+        
+        return Alamofire.request(url.appendingPathComponent("messages.getHistory"), method: .get, parameters: parameters)
+    }
+    
     func getCurrentUserCredentianals(completion: @escaping () -> Void) {
         let parameters: Parameters = [
             "access_token": accessToken,

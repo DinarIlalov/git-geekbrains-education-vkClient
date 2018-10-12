@@ -39,6 +39,10 @@
 		0DC70B1F21070BBD009CA2AB /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC70B1E21070BBD009CA2AB /* Friends.swift */; };
 		0DCB814E2142808D0074D8FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DCB814D2142808D0074D8FB /* GoogleService-Info.plist */; };
 		0DCB8150214284780074D8FB /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DCB814F214284780074D8FB /* FirebaseService.swift */; };
+		0DDFCBF7215A2A7700F6EC3D /* SaveMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDFCBF4215A2A7700F6EC3D /* SaveMessagesOperation.swift */; };
+		0DDFCBF8215A2A7700F6EC3D /* GetMessagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDFCBF5215A2A7700F6EC3D /* GetMessagesOperation.swift */; };
+		0DDFCBF9215A2A7700F6EC3D /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDFCBF6215A2A7700F6EC3D /* AsyncOperation.swift */; };
+		0DDFCBFB215A2ABB00F6EC3D /* MessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDFCBFA215A2ABA00F6EC3D /* MessagesDataSource.swift */; };
 		0DE036A720F869FF001226D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE036A620F869FF001226D6 /* AppDelegate.swift */; };
 		0DE036AC20F869FF001226D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AA20F869FF001226D6 /* Main.storyboard */; };
 		0DE036AE20F86A01001226D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AD20F86A01001226D6 /* Assets.xcassets */; };
@@ -79,6 +83,10 @@
 		0DC70B1E21070BBD009CA2AB /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		0DCB814D2142808D0074D8FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0DCB814F214284780074D8FB /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		0DDFCBF4215A2A7700F6EC3D /* SaveMessagesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveMessagesOperation.swift; sourceTree = "<group>"; };
+		0DDFCBF5215A2A7700F6EC3D /* GetMessagesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMessagesOperation.swift; sourceTree = "<group>"; };
+		0DDFCBF6215A2A7700F6EC3D /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		0DDFCBFA215A2ABA00F6EC3D /* MessagesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDataSource.swift; sourceTree = "<group>"; };
 		0DE036A320F869FF001226D6 /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DE036A620F869FF001226D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DE036AB20F869FF001226D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -134,6 +142,8 @@
 		0D1A65912106FEA30047BFBB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0DDFCBFA215A2ABA00F6EC3D /* MessagesDataSource.swift */,
+				0DDFCBF3215A2A7700F6EC3D /* Operations */,
 				0D1A65922106FEAC0047BFBB /* VKServices */,
 				0D1A65972107076D0047BFBB /* UserData.swift */,
 				0DCB814F214284780074D8FB /* FirebaseService.swift */,
@@ -234,6 +244,16 @@
 				0DC634142158DCD20085F072 /* Message.swift */,
 			);
 			path = DataModels;
+			sourceTree = "<group>";
+		};
+		0DDFCBF3215A2A7700F6EC3D /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				0DDFCBF4215A2A7700F6EC3D /* SaveMessagesOperation.swift */,
+				0DDFCBF5215A2A7700F6EC3D /* GetMessagesOperation.swift */,
+				0DDFCBF6215A2A7700F6EC3D /* AsyncOperation.swift */,
+			);
+			path = Operations;
 			sourceTree = "<group>";
 		};
 		0DE0369A20F869FF001226D6 = {
@@ -431,6 +451,7 @@
 			files = (
 				0D84C94821176E310096D562 /* UIVeiw.swift in Sources */,
 				0DC6340F2158D0BB0085F072 /* OutcommingMessageTableViewCell.swift in Sources */,
+				0DDFCBF7215A2A7700F6EC3D /* SaveMessagesOperation.swift in Sources */,
 				0D7AF9DD2119C9E70079A02F /* DataSource.swift in Sources */,
 				0D21E45321059ED700496350 /* MyFriendPhotoCollectionViewController.swift in Sources */,
 				0D10B904212582590009D110 /* Chat.swift in Sources */,
@@ -441,13 +462,16 @@
 				0DC70B1F21070BBD009CA2AB /* Friends.swift in Sources */,
 				0D6649732124448F0074B6B3 /* NewsFeedTableViewController.swift in Sources */,
 				0D5C62C321020BE0002F6786 /* AllGroupsTableViewController.swift in Sources */,
+				0DDFCBF9215A2A7700F6EC3D /* AsyncOperation.swift in Sources */,
 				0DE036A720F869FF001226D6 /* AppDelegate.swift in Sources */,
 				0DC634152158DCD20085F072 /* Message.swift in Sources */,
 				0D5C62BC2101BB8C002F6786 /* MyGroupsTableViewController.swift in Sources */,
+				0DDFCBF8215A2A7700F6EC3D /* GetMessagesOperation.swift in Sources */,
 				0D664977212444E10074B6B3 /* NewsFeedPhotoTableViewCell.swift in Sources */,
 				0D5C62BE2101BB9D002F6786 /* GroupTableViewCell.swift in Sources */,
 				0DC634112158D0CF0085F072 /* IncommingMessageTableViewCell.swift in Sources */,
 				0D5C62B72101B6F8002F6786 /* MyFriendsTableViewController.swift in Sources */,
+				0DDFCBFB215A2ABB00F6EC3D /* MessagesDataSource.swift in Sources */,
 				0D5C62B92101B70C002F6786 /* FriendTableViewCell.swift in Sources */,
 				0DC70B1D21070BAA009CA2AB /* Groups.swift in Sources */,
 				0DCB8150214284780074D8FB /* FirebaseService.swift in Sources */,

@@ -677,7 +677,7 @@
                                             <outlet property="lastMessageTextLabel" destination="HFi-Dc-IRf" id="8CC-re-1l2"/>
                                             <outlet property="titleLabel" destination="bhE-Yx-jCF" id="pFs-4C-qr7"/>
                                             <outlet property="unreadedCountLabel" destination="Zkt-XD-IVf" id="i3h-vU-GGg"/>
-                                            <segue destination="5N1-NN-DMu" kind="show" identifier="chatMessagesSegue" id="4Kb-YX-9st"/>
+                                            <segue destination="5N1-NN-DMu" kind="show" identifier="chatMessagesSegue" id="cUY-G1-MnQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -724,16 +724,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qwp-C8-PQr">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="qwp-C8-PQr">
                                                     <rect key="frame" x="4" y="4" width="36" height="36"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="36" id="2UZ-d8-GJP"/>
                                                         <constraint firstAttribute="width" secondItem="qwp-C8-PQr" secondAttribute="height" multiplier="1:1" id="Gmw-69-Rcp"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Входящее сообщение" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRt-9w-3Rr">
                                                     <rect key="frame" x="48" y="4" width="226" height="36"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="irP-g7-hlr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -743,7 +747,6 @@
                                                 <constraint firstItem="HRt-9w-3Rr" firstAttribute="top" secondItem="4HF-R8-l1l" secondAttribute="top" constant="4" id="1dl-4y-OMh"/>
                                                 <constraint firstItem="qwp-C8-PQr" firstAttribute="top" secondItem="4HF-R8-l1l" secondAttribute="top" constant="4" id="2Jd-bt-brA"/>
                                                 <constraint firstItem="qwp-C8-PQr" firstAttribute="leading" secondItem="4HF-R8-l1l" secondAttribute="leading" constant="4" id="9TW-a2-68u"/>
-                                                <constraint firstAttribute="bottom" secondItem="qwp-C8-PQr" secondAttribute="bottom" constant="4" id="Jqy-EM-7qd"/>
                                                 <constraint firstAttribute="trailing" secondItem="HRt-9w-3Rr" secondAttribute="trailing" constant="46" id="M7s-ZD-f6h"/>
                                                 <constraint firstAttribute="bottom" secondItem="HRt-9w-3Rr" secondAttribute="bottom" constant="4" id="zl3-XS-1tW"/>
                                             </constraints>
@@ -763,7 +766,10 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4I-m5-A1W">
                                                     <rect key="frame" x="75" y="4" width="229" height="36"/>
                                                     <color key="backgroundColor" red="0.54357291215311621" green="0.71687401134954176" blue="0.89101873342175064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="izs-vK-7jS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -783,6 +789,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="5N1-NN-DMu" id="gdG-GN-2ZD"/>
                                     <outlet property="delegate" destination="5N1-NN-DMu" id="BSq-v7-w3e"/>
+                                    <outlet property="prefetchDataSource" destination="5N1-NN-DMu" id="hAB-c2-TDj"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -795,6 +802,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ik2-XC-RBk"/>
                     </view>
+                    <navigationItem key="navigationItem" id="lN3-VB-1Jd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="lPh-6Y-PT8">
+                            <connections>
+                                <action selector="clearMessagesCashButtonDidTap:" destination="5N1-NN-DMu" id="rHY-bQ-Qql"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Us0-lM-t7F" id="Ald-Sa-Q4L"/>
                     </connections>
@@ -844,6 +858,7 @@
     </scenes>
     <resources>
         <image name="comments" width="52" height="52"/>
+        <image name="emptyAvatar" width="75" height="75"/>
         <image name="like" width="52" height="52"/>
         <image name="repost" width="50" height="50"/>
         <image name="views" width="52" height="52"/>

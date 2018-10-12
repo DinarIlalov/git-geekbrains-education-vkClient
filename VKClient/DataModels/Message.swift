@@ -9,6 +9,8 @@
 import Foundation
 import RealmSwift
 
+typealias MessageRef = ThreadSafeReference<Message>
+
 class Message: Object {
 
     @objc dynamic var id: Int = 0
@@ -16,6 +18,16 @@ class Message: Object {
     @objc dynamic var unixDate: Int = 0
     @objc dynamic var authorId: Int = 0
     @objc dynamic var text: String = ""
+    
+    var ref: MessageRef {
+        return ThreadSafeReference(to: self)
+    }
+    static func instance(from ref: MessageRef?) -> Message? {
+        guard let ref = ref,
+            let realm = try? Realm() else { return nil }
+        
+        return realm.resolve(ref)
+    }
     
     convenience init?(json: [String: Any]) {
         guard let id = json["id"] as? Int,

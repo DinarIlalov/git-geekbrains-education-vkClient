@@ -9,6 +9,8 @@
 import Foundation
 import RealmSwift
 
+typealias ChatRef = ThreadSafeReference<Chat>
+
 class Chat: Object {
     
     @objc dynamic var peerId: Int = 0
@@ -26,6 +28,16 @@ class Chat: Object {
     
     override static func primaryKey() -> String? {
         return "peerId"
+    }
+    
+    var ref: ChatRef {
+        return ThreadSafeReference(to: self)
+    }
+    static func instance(from ref: ChatRef?) -> Chat? {
+        guard let ref = ref,
+            let realm = try? Realm() else { return nil }
+        
+        return realm.resolve(ref)
     }
     
     convenience init?(json: [String: Any], profiles: [[String: Any]], groups: [[String: Any]]) {

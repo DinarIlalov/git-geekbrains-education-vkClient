@@ -77,6 +77,24 @@ class DataBase {
         return getDataForType(Message.self, filteredBy: "peerId = \(peerId)")
     }
     
+    static func clearMessages(for peerId: Int) {
+        do {
+            let realm = try Realm()
+            
+            var oldData = realm.objects(Message.self)
+            oldData = oldData.filter(NSPredicate(format: "peerId = \(peerId)"))
+            realm.beginWrite()
+            realm.delete(oldData)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
+    }
+    
+    static func getMessage(byId id: Int) -> Message? {
+        return getDataForType(Message.self, filteredBy: "id = \(id)").first
+    }
+    
     private static func getDataForType<Element: Object>(_ type: Element.Type, filteredBy condition: String? = nil) -> [Element] {
         do {
             let realm = try Realm()
