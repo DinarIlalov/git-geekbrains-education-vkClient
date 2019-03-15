@@ -15,7 +15,6 @@ class ChatsViewController: UIViewController {
     
     // MARK: Properties
     var dataSource = DataSource(realmObjectType: Chat.self)
-    let dateFormatter = DateFormatter.getStringRuFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +54,7 @@ extension ChatsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ChatsTableViewCell else { return UITableViewCell() }
         
         cell.chat = dataSource.objects?[indexPath.row]
-        cell.dateLabel.text = dateFormatter.string(from: cell.chat?.lastMessageDate ?? Date())
+        cell.dateLabel.text = (cell.chat?.lastMessageDate ?? Date()).toRuDateString()
         return cell
     }
     
