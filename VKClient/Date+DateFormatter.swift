@@ -10,13 +10,12 @@ import Foundation
 
 extension Date {
     func toRuDateString() -> String {
-        let dateFormatter = DateFormatter.getStringRuFormatter()
-        return dateFormatter.string(from: self)
+        return DateFormatter.stringRuFormatter.string(from: self)
     }
 }
 
 extension DateFormatter {
-    static func getStringRuFormatter() -> DateFormatter {
+    static var stringRuFormatter: DateFormatter = {
         let monthFormat = "MMM"
         let yearFormat = ""
         
@@ -24,5 +23,5 @@ extension DateFormatter {
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "dd \(monthFormat)\(yearFormat)"
         return dateFormatter
-    }
+    }()
 }

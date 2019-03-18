@@ -10,8 +10,6 @@ import Foundation
 
 class News {
     
-    static let dateFormatter = DateFormatter.getStringRuFormatter()
-    
     var id: Int = 0
     var postId: Int = 0
     var type: String = ""
@@ -108,7 +106,7 @@ class News {
         
         self.type = type
         self.date = Date(timeIntervalSince1970: TimeInterval(json["date"] as? Int ?? 0))
-        self.stringRuDate = News.dateFormatter.string(from: self.date)
+        self.stringRuDate = self.date.toRuDateString()
         self.postId = json["post_id"] as? Int ?? 0
         fillOwner(ownerIdFromJson: json["source_id"] as? Int ?? 0, profiles: profiles, groups: groups)
         self.id = Int("\(self.ownerId)\(self.postId)") ?? 0
