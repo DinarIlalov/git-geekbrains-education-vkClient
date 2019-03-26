@@ -47,6 +47,8 @@
 		0DE036AC20F869FF001226D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AA20F869FF001226D6 /* Main.storyboard */; };
 		0DE036AE20F86A01001226D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AD20F86A01001226D6 /* Assets.xcassets */; };
 		0DE036B120F86A01001226D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DE036AF20F86A01001226D6 /* LaunchScreen.storyboard */; };
+		6B45AA95224A269100842527 /* VKApiServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B45AA94224A269100842527 /* VKApiServiceInterface.swift */; };
+		6B45AA97224A28B500842527 /* VKApiServiceLoggingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B45AA96224A28B500842527 /* VKApiServiceLoggingProxy.swift */; };
 		6BE03EF3223BDCE7007A280A /* VKServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE03EF2223BDCE7007A280A /* VKServiceAdapter.swift */; };
 		6BE03EF5223BDE79007A280A /* UserFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE03EF4223BDE79007A280A /* UserFriend.swift */; };
 		BE327768C3B4414471861A4E /* Pods_VKClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B226A68DB316CA21F8A5F0E6 /* Pods_VKClient.framework */; };
@@ -96,6 +98,9 @@
 		0DE036B020F86A01001226D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DE036B220F86A01001226D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		366CD993120C3E78EB50D8F5 /* Pods-VKClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKClient/Pods-VKClient.debug.xcconfig"; sourceTree = "<group>"; };
+		6B45AA94224A269100842527 /* VKApiServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKApiServiceInterface.swift; sourceTree = "<group>"; };
+		6B45AA96224A28B500842527 /* VKApiServiceLoggingProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKApiServiceLoggingProxy.swift; sourceTree = "<group>"; };
+		6B45AA98224A2BD300842527 /* Coffee.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Coffee.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		6BE03EF2223BDCE7007A280A /* VKServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKServiceAdapter.swift; sourceTree = "<group>"; };
 		6BE03EF4223BDE79007A280A /* UserFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriend.swift; sourceTree = "<group>"; };
 		B226A68DB316CA21F8A5F0E6 /* Pods_VKClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +166,8 @@
 				0D1A65932106FEC50047BFBB /* VKAuthService.swift */,
 				0D1A65952106FFA90047BFBB /* VKApiService.swift */,
 				6BE03EF2223BDCE7007A280A /* VKServiceAdapter.swift */,
+				6B45AA94224A269100842527 /* VKApiServiceInterface.swift */,
+				6B45AA96224A28B500842527 /* VKApiServiceLoggingProxy.swift */,
 			);
 			path = VKServices;
 			sourceTree = "<group>";
@@ -285,6 +292,7 @@
 				0D1A65912106FEA30047BFBB /* Services */,
 				0D1A658E2106FD4F0047BFBB /* Authorization */,
 				0DE036AA20F869FF001226D6 /* Main.storyboard */,
+				6B45AA98224A2BD300842527 /* Coffee.playground */,
 			);
 			path = VKClient;
 			sourceTree = "<group>";
@@ -469,6 +477,7 @@
 				0D7AF9DD2119C9E70079A02F /* DataSource.swift in Sources */,
 				0D21E45321059ED700496350 /* MyFriendPhotoCollectionViewController.swift in Sources */,
 				6BE03EF3223BDCE7007A280A /* VKServiceAdapter.swift in Sources */,
+				6B45AA97224A28B500842527 /* VKApiServiceLoggingProxy.swift in Sources */,
 				0D10B904212582590009D110 /* Chat.swift in Sources */,
 				0D19988D21180CF20096A064 /* FriendsPhoto.swift in Sources */,
 				0D21E45521059EFD00496350 /* FriendPhotoCollectionViewCell.swift in Sources */,
@@ -492,6 +501,7 @@
 				0DCB8150214284780074D8FB /* FirebaseService.swift in Sources */,
 				0DC6340D2158D0920085F072 /* MessagesViewController.swift in Sources */,
 				0DB0D3362125B5C100AF3029 /* Date+DateFormatter.swift in Sources */,
+				6B45AA95224A269100842527 /* VKApiServiceInterface.swift in Sources */,
 				0D664975212444C00074B6B3 /* NewsFeedPostTableViewCell.swift in Sources */,
 				6BE03EF5223BDE79007A280A /* UserFriend.swift in Sources */,
 				0D664979212445B40074B6B3 /* News.swift in Sources */,

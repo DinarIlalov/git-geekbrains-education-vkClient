@@ -58,7 +58,7 @@ class NewsFeedTableViewController: UITableViewController {
     
     private func fillTable() {
         
-        VKApiService().getNewsfeed(withOffset: currentSearchOffset, resultCount: searchResultCount, startFrom: startFrom) { [weak self] (newsfeed, startFrom) in
+        VKApiServiceLoggingProxy().getNewsfeed(withOffset: currentSearchOffset, resultCount: searchResultCount, startFrom: startFrom) { [weak self] (newsfeed, startFrom) in
             guard let strongSelf = self else { return }
             strongSelf.startFrom = startFrom
             strongSelf.newsfeed += newsfeed

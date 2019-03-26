@@ -97,7 +97,7 @@ extension VKLoginViewController: WKNavigationDelegate {
         // TODO: debug
         print(accessToken)
         
-        VKApiService().getCurrentUserCredentianals() {
+        VKApiServiceLoggingProxy().getCurrentUserCredentianals() {
             FirebaseService.saveLoginInfo()
         }
         

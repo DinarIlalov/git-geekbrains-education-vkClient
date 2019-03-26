@@ -51,7 +51,7 @@ class MyFriendPhotoCollectionViewController: UICollectionViewController, UIColle
     private func fillPhotosArray() {
         
         dataSource = DataSource(realmObjectType: FriendsPhoto.self, filteredBy: "userId == \(userId)")
-        VKApiService().getPhotosByUserId(userId)
+        VKApiServiceLoggingProxy().getPhotosByUserId(userId)
         if let collectionView = collectionView {
             dataSource?.attachTo(collectionView: collectionView)
         }

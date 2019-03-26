@@ -73,7 +73,7 @@ class AllGroupsTableViewController: UITableViewController {
     private func searchGroups(byName groupName: String?) {
         
         if let groupName = groupName, !groupName.isEmpty {
-            VKApiService().searchGroup(byName: groupName, withOffset: currentSearchOffset, resultCount: searchResultCount) { [weak self] (groups, totalNumber) in
+            VKApiServiceLoggingProxy().searchGroup(byName: groupName, withOffset: currentSearchOffset, resultCount: searchResultCount) { [weak self] (groups, totalNumber) in
                 
                 // новый поиск
                 if self?.currentSearchOffset == 0 {

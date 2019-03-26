@@ -38,7 +38,7 @@ class ChatsViewController: UIViewController {
     
     // MARK: - Functions
     private func fillTableData() {
-        VKApiService().getChatsList()
+        VKApiServiceLoggingProxy().getChatsList()
         dataSource.attachTo(tableView: tableView)
     }
 }

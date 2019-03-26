@@ -60,7 +60,7 @@ class GetMessagesOperation: AsyncOperation {
         }
         
         print("get \(loadingType) \(startMessageId)")
-        dataRequest = VKApiService().getMessagesRequest(with: peerType, chatPeerId: peerId, offset: offset, count: count, start_message_id: startMessageId)
+        dataRequest = VKApiServiceLoggingProxy().getMessagesRequest(with: peerType, chatPeerId: peerId, offset: offset, count: count, start_message_id: startMessageId)
         
         guard let dataRequest = self.dataRequest else {
             self.state = .finished
