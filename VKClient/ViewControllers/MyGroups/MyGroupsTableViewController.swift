@@ -75,7 +75,7 @@ class MyGroupsTableViewController: UITableViewController {
     // MARK: - Functions
     private func fillMyGroupsData() {
         
-        VKApiService().getCurrentUserGroups()
+        VKApiServiceLoggingProxy().getCurrentUserGroups()
         dataSource.attachTo(tableView: tableView)
     }
 }

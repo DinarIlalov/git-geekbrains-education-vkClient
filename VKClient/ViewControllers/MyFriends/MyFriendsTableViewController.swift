@@ -48,7 +48,7 @@ class MyFriendsTableViewController: UITableViewController {
 
     // MARK: - Functions
     private func fillFriendsData() {
-        VKApiService().getCurrentUserFriends()
+        VKApiServiceLoggingProxy().getCurrentUserFriends()
         dataSource.attachTo(tableView: tableView)
     }
 }

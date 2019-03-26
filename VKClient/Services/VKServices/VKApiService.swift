@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class VKApiService {
+class VKApiService: VKApiServiceInterface {
     let pathUrl: String
     let idApi: String = "6641335"
     let apiVersion: String = "5.80"
