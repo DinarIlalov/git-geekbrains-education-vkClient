@@ -100,6 +100,7 @@
 		366CD993120C3E78EB50D8F5 /* Pods-VKClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VKClient/Pods-VKClient.debug.xcconfig"; sourceTree = "<group>"; };
 		6B45AA94224A269100842527 /* VKApiServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKApiServiceInterface.swift; sourceTree = "<group>"; };
 		6B45AA96224A28B500842527 /* VKApiServiceLoggingProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKApiServiceLoggingProxy.swift; sourceTree = "<group>"; };
+		6B45AA98224A2BD300842527 /* Coffee.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Coffee.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		6BE03EF2223BDCE7007A280A /* VKServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKServiceAdapter.swift; sourceTree = "<group>"; };
 		6BE03EF4223BDE79007A280A /* UserFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriend.swift; sourceTree = "<group>"; };
 		B226A68DB316CA21F8A5F0E6 /* Pods_VKClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +292,7 @@
 				0D1A65912106FEA30047BFBB /* Services */,
 				0D1A658E2106FD4F0047BFBB /* Authorization */,
 				0DE036AA20F869FF001226D6 /* Main.storyboard */,
+				6B45AA98224A2BD300842527 /* Coffee.playground */,
 			);
 			path = VKClient;
 			sourceTree = "<group>";
